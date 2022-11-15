@@ -9,8 +9,10 @@ int main() {
 	//cout << "Enter path:\t";
 	//cin >> path;
 	analyseWords(path, obj);
-	mapToFile<string, int>(obj);
+	int sum = mapToFile<string, int>(obj);
 	auto topVal = wordTop(obj);
 	cout << topVal->first << "\t" << topVal->second << endl << endl;
 	printMap(obj);
+	cout << "\nSum: " << sum;
+	
 }	

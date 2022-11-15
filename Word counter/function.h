@@ -18,14 +18,15 @@ void addWord(map<string, int>& obj, const string& key) {
 
 void printMap(const map<string, int>& obj) {//contain a word and number of repeats
 	auto iter = obj.begin();
-	for (; iter != obj.end() && iter->second >=2; iter++) {
+	for (; iter != obj.end() /*&& iter->second >=2*/; iter++) {
 		cout << "Word:\t" << iter->first << endl << "Count:\t " << iter->second << endl << "-------------------------------------\n";
 	}
 }
 
 
-void analyseWords(string path, map<string, int>& _map) {
+ void analyseWords(string path, map<string, int>& _map) {
 	ifstream in(path, ios::in);
+	int sum = 0;
 	while (!in.eof()) {
 		string temp;
 		in >> temp;
@@ -35,13 +36,17 @@ void analyseWords(string path, map<string, int>& _map) {
 }
 
 template<class T1, class T2>
-void mapToFile(map<T1, T2>& _map) {
+int mapToFile(map<T1, T2>& _map) {
 	ofstream OUT("result.txt", ios::out | ios::trunc);
 	auto iter = _map.begin();
-	for (; iter != _map.end() && iter->second >= 2; iter++) {
+	int sum = 0;
+	for (; iter != _map.end() ; iter++) {
 		OUT << endl << iter->first << "\t" << iter->second;
+		sum += iter->second;
 	}
+	OUT << endl << "SUM: " << sum;
 	OUT.close();
+	return sum;
 }
 
 map<string, int>::iterator wordTop(map<string, int>& _map) {
